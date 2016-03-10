@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # SSE_13112126
 
 #自我介绍
@@ -24,6 +23,3 @@ PS：最近很困扰的一件事，北京儿化音一般都加在最后，那为
 [百度](http://baidu.com/ "Title") 一下，你就知道.
 
 ![baidu](http://img1.cache.netease.com/house/2015/3/28/20150328094208c42a3.jpg "baidu")
-=======
-# SSE_13112126
->>>>>>> parent of 18565b4... Update README.md
