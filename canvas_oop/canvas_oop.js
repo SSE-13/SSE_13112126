@@ -114,12 +114,6 @@ rect2.color = '#00FFFF'
 
 */
 /************
-var canvas = document.getElementById("game");
-var ctx=canvas.getContext("2d");
-
-ctx.font="20px Georgia";
-ctx.fillText("Hello World!",10,50);
-
 ctx.font="30px Verdana";
 // 创建渐变
 var gradient=ctx.createLinearGradient(0,0,canvas.width,0);
@@ -131,11 +125,23 @@ ctx.fillStyle=gradient;
 ctx.fillText("w3school.com.cn",10,90);
 ********/
 var text_one = new TextField();
-text_one.x = 150;
-text_one.y = 250;
+text_one.x = 250;
+text_one.y = 50;
+text_one.font = "20px Georgia";
+text_one.string = 'PRESS START';
+text_one.color = '#EEE000';
+// 创建渐变
+var ctx = canvas.getContext("2d");
+var gradient = ctx.createLinearGradient(0, 0, canvas.width, 0);
+gradient.addColorStop(0, "magenta");
+gradient.addColorStop(0.5, "blue");
+gradient.addColorStop(1.0, "red");
+//text_one.color = gradient;
+// 用渐变填色
 var text_two = new TextField();
-text_two.x = 150;
-text_two.y = 250;
+text_two.x = 160;
+text_two.y = 300;
+text_one.color = '#FF8C00';
 var Background = new Bitmap();
 Background.source = 'background.jpg';
 var man_one = new Bitmap();
@@ -163,7 +169,7 @@ woman_two.x = 285;
 woman_two.y = 190;
 woman_two.source = 'character_woman_two.png';
 //渲染队列
-var renderQueue = [Background, man_one, man_three, man_two, man_four, woman_one, woman_two, text_one];
+var renderQueue = [Background, man_one, man_three, man_two, man_four, woman_one, woman_two, text_one, text_two];
 //资源加载列表
 var imageList = ['background.jpg', 'character_man_one.png', 'character_man_three.png', 'character_man_two.png', 'character_man_five.png', 'character_woman_one.png', 'character_woman_two.png'];
 //先加载资源，加载成功之后执行渲染队列
