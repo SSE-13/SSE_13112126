@@ -142,6 +142,10 @@ var text_one = new TextField();
 text_one.x = 150;
 text_one.y =250;
 
+var text_two = new TextField();
+text_two.x = 150;
+text_two.y =250;
+
 var Background = new Bitmap();
 Background.source = 'background.jpg';
 
