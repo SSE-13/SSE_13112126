@@ -11,6 +11,8 @@ const BOUNDS_RIGHT = 400;
 
 const BOUNCE = 0.95;
 
+const  jiasudu = 0.03;
+
 /**
  * 计时器系统
  */
@@ -41,7 +43,6 @@ class Ticker {
     }
 }
 
-
 class Body {
 
     vx = 0;
@@ -52,9 +53,6 @@ class Body {
     height = 0;
     
     key = 0;
-    stop_x = 0;
-    stop_y = 0;
-    jiasudu = 0.03;
     
     displayObject;
 
@@ -92,7 +90,7 @@ class Body {
        if(this.y + this.height > 400){
             this.y = 400 - this.height;
             //加入摩擦力
-            this.vx = this.vx - this.jiasudu;
+            this.vx = this.vx - jiasudu;
        }
         //根据物体位置更新显示对象属性
         var displayObject = this.displayObject;
@@ -100,7 +98,6 @@ class Body {
         displayObject.y = this.y;
         }
 }
-
 
 var rect = new Rect();
 rect.width = 150;

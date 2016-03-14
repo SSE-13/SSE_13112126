@@ -6,6 +6,7 @@ var BOUNDS_BOTTOM = 400;
 var BOUNDS_LEFT = 0;
 var BOUNDS_RIGHT = 400;
 var BOUNCE = 0.95;
+var jiasudu = 0.03;
 /**
  * 计时器系统
  */
@@ -42,9 +43,6 @@ var Body = (function () {
         this.width = 0;
         this.height = 0;
         this.key = 0;
-        this.stop_x = 0;
-        this.stop_y = 0;
-        this.jiasudu = 0.04;
         this.displayObject = displayObject;
     }
     Body.prototype.onTicker = function (duringTime) {
@@ -74,7 +72,7 @@ var Body = (function () {
         if (this.y + this.height > 400) {
             this.y = 400 - this.height;
             //加入摩擦力
-            this.vx = this.vx - this.jiasudu;
+            this.vx = this.vx - jiasudu;
         }
         //根据物体位置更新显示对象属性
         var displayObject = this.displayObject;
