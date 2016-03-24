@@ -86,13 +86,14 @@ var game;
             }
         };
         BoyBody.prototype.onTicker = function (duringTime) {
-            if (this.posi < this.point_y.length) {
+            if (this.posi <= this.point_y.length) {
                 this.dx = (this.point_x[this.posi + 1] - this.point_x[this.posi]);
                 this.dy = (this.point_y[this.posi + 1] - this.point_y[this.posi]);
                 this.t = Math.sqrt(this.dx * this.dx + this.dy * this.dy) / this.speed;
                 this.vx = this.dx / this.t;
                 this.vy = this.dy / this.t;
-                if (this.x < this.point_x[this.posi + 1] * GRID_PIXEL_WIDTH && this.y < this.point_y[this.posi + 1] * GRID_PIXEL_HEIGHT) {
+                console.log(this.vx, this.vy);
+                if (this.x <= this.point_x[this.posi + 1] * GRID_PIXEL_WIDTH || this.y <= this.point_y[this.posi + 1] * GRID_PIXEL_HEIGHT) {
                     this.x += this.vx * duringTime;
                     this.y += this.vy * duringTime;
                 }
