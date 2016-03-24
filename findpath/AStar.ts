@@ -3,8 +3,8 @@ module astar {
 
     export class Node {
 
-        x: number;
-        y: number;
+        x: number = 0;
+        y: number = 0;
         f: number;
         g: number;
         h: number;
@@ -18,7 +18,7 @@ module astar {
             this.x = x;
             this.y = y;
         }
-
+        
         toString() {
             if (this.inPath) {
                 return "田"

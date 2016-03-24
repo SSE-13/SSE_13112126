@@ -61,6 +61,9 @@ var game;
         __extends(BoyBody, _super);
         function BoyBody() {
             _super.apply(this, arguments);
+            this.point_x = new Array();
+            this.point_y = new Array();
+            this.speed = 0.1;
         }
         BoyBody.prototype.run = function (grid) {
             grid.setStartNode(0, 0);
@@ -69,19 +72,36 @@ var game;
             findpath.setHeurisitic(findpath.diagonal);
             var result = findpath.findPath(grid);
             var path = findpath._path;
-            console.log(path);
+            //      console.log(path);
             console.log(grid.toString());
-            /*    for(var i: number = 0; i < path.length; i++){
-                     this.point.push(path[i]);
-                 }*/
+            for (var i = 0; i < path.length; i++) {
+                //  this.point[i]. = path[i].x;
+                //   console.log(this.point[i].x);
+                this.point_x[i] = path[i].x;
+                this.point_y[i] = path[i].y;
+            }
         };
         BoyBody.prototype.onTicker = function (duringTime) {
-            /*   for(var i: number = 0; i < this.point.length; i++){
-                   this.x = this.point[i].x;
-                   this.y = this.point[i].y;
-                   this.updateDisplayObject();
-               }
-            */
+            for (var i = 0; i < this.point_x.length - 1; i++) {
+                this.dx = this.point_x[i + 1] - this.point_x[i];
+                this.dy = this.point_y[i + 1] - this.point_y[i];
+                this.t = (Math.sqrt(this.dx * this.dx + this.dy * this.dy)) / this.speed;
+                console.log(this.dx);
+                console.log(this.dx);
+                console.log(this.t);
+                this.vx = this.dx / this.t;
+                this.vy = this.dy / this.t;
+                var k = 0;
+                while (k <= this.t) {
+                    var currentTime = Date.now();
+                    this.Time = currentTime - this.lastTime;
+                    this.lastTime = currentTime;
+                    k += this.Time;
+                    this.x += this.vx * this.Time;
+                    this.y += this.vy * this.Time;
+                    this.updateDisplayObject();
+                }
+            }
         };
         return BoyBody;
     }(Body));

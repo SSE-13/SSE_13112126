@@ -2,6 +2,8 @@ var astar;
 (function (astar) {
     var Node = (function () {
         function Node(x, y) {
+            this.x = 0;
+            this.y = 0;
             this.walkable = true;
             this.costMultiplier = 1.0;
             this.visited = false;
