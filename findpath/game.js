@@ -63,7 +63,11 @@ var game;
             _super.apply(this, arguments);
             this.point_x = new Array();
             this.point_y = new Array();
-            this.speed = 0.1;
+            //     point : Array<astar.Node>=[];
+            //  lastTime;   
+            //  Time ; 
+            this.speed = 10;
+            this.posi = 0;
         }
         BoyBody.prototype.run = function (grid) {
             grid.setStartNode(0, 0);
@@ -72,7 +76,7 @@ var game;
             findpath.setHeurisitic(findpath.diagonal);
             var result = findpath.findPath(grid);
             var path = findpath._path;
-            //      console.log(path);
+            //    console.log(path);
             console.log(grid.toString());
             for (var i = 0; i < path.length; i++) {
                 //  this.point[i]. = path[i].x;
@@ -82,24 +86,18 @@ var game;
             }
         };
         BoyBody.prototype.onTicker = function (duringTime) {
-            for (var i = 0; i < this.point_x.length - 1; i++) {
-                this.dx = this.point_x[i + 1] - this.point_x[i];
-                this.dy = this.point_y[i + 1] - this.point_y[i];
-                this.t = (Math.sqrt(this.dx * this.dx + this.dy * this.dy)) / this.speed;
-                console.log(this.dx);
-                console.log(this.dx);
-                console.log(this.t);
+            if (this.posi < this.point_y.length) {
+                this.dx = (this.point_x[this.posi + 1] - this.point_x[this.posi]);
+                this.dy = (this.point_y[this.posi + 1] - this.point_y[this.posi]);
+                this.t = Math.sqrt(this.dx * this.dx + this.dy * this.dy) / this.speed;
                 this.vx = this.dx / this.t;
                 this.vy = this.dy / this.t;
-                var k = 0;
-                while (k <= this.t) {
-                    var currentTime = Date.now();
-                    this.Time = currentTime - this.lastTime;
-                    this.lastTime = currentTime;
-                    k += this.Time;
-                    this.x += this.vx * this.Time;
-                    this.y += this.vy * this.Time;
-                    this.updateDisplayObject();
+                if (this.x < this.point_x[this.posi + 1] * GRID_PIXEL_WIDTH && this.y < this.point_y[this.posi + 1] * GRID_PIXEL_HEIGHT) {
+                    this.x += this.vx * duringTime;
+                    this.y += this.vy * duringTime;
+                }
+                else {
+                    this.posi++;
                 }
             }
         };
