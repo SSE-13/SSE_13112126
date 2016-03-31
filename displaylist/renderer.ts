@@ -31,8 +31,8 @@ module render {
           var matrix = new render.Matrix();
           matrix.a = m1.a*m2.a;
           matrix.b = m1.b*m2.b;
-          matrix.c = m1.a*m2.c;
-          matrix.d = m1.a*m2.d;
+          matrix.c = m1.c*m2.c;
+          matrix.d = m1.d*m2.d;
           matrix.tx = m1.tx+m2.tx;
           matrix.ty = m1.ty+m2.ty;
           return matrix;

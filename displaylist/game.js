@@ -33,7 +33,7 @@ var HumanBody = (function (_super) {
         this.vx = 2;
         this.x += this.vx * duringTime;
         this.y += this.vy * duringTime;
-        this.rotation = 30;
+        this.rotation += 1;
         console.log(this.x);
     };
     return HumanBody;
