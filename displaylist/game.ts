@@ -38,11 +38,11 @@ class HumanBody extends Body {
 
 
     onTicker(duringTime: number) {
-
-        // this.x = 
-        // this.y = 
-        // this.rotation =
-
+         this.vx=2;
+         this.x +=this.vx*duringTime; 
+         this.y +=this.vy*duringTime; 
+         this.rotation = 30;
+         console.log(this.x);
     }
 }
 

@@ -26,7 +26,17 @@ module render {
         constructor() {
             this.globalMatrix = new render.Matrix();
         }
-
+        
+     change(m1:Matrix,m2:Matrix){
+          var matrix = new render.Matrix();
+          matrix.a = m1.a*m2.a;
+          matrix.b = m1.b*m2.b;
+          matrix.c = m1.a*m2.c;
+          matrix.d = m1.a*m2.d;
+          matrix.tx = m1.tx+m2.tx;
+          matrix.ty = m1.ty+m2.ty;
+          return matrix;
+      }
         draw(context: CanvasRenderingContext2D) {
 
             var parent = this.parent;
@@ -42,8 +52,9 @@ module render {
             }
             else {
                 //TODO:
-                // GLOBAL_MATRIX = PARENT_GLOBAL_MATRIX * LOCAL_MATRIX
-                this.globalMatrix = localMatrix;
+                // GLOBAL_MATRIX =  LOCAL_MATRIX*PARENT_GLOBAL_MATRIX; 
+              // this.globalMatrix = localMatrix * this.parent.globalMatrix ;
+              this.globalMatrix = this.change(localMatrix,this.parent.globalMatrix);
             }
 
 

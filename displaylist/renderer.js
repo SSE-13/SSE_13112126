@@ -19,6 +19,16 @@ var render;
             this.rotation = 0;
             this.globalMatrix = new render.Matrix();
         }
+        DisplayObject.prototype.change = function (m1, m2) {
+            var matrix = new render.Matrix();
+            matrix.a = m1.a * m2.a;
+            matrix.b = m1.b * m2.b;
+            matrix.c = m1.a * m2.c;
+            matrix.d = m1.a * m2.d;
+            matrix.tx = m1.tx + m2.tx;
+            matrix.ty = m1.ty + m2.ty;
+            return matrix;
+        };
         DisplayObject.prototype.draw = function (context) {
             var parent = this.parent;
             var angle = this.rotation / 180 * Math.PI;
@@ -31,8 +41,9 @@ var render;
             }
             else {
                 //TODO:
-                // GLOBAL_MATRIX = PARENT_GLOBAL_MATRIX * LOCAL_MATRIX
-                this.globalMatrix = localMatrix;
+                // GLOBAL_MATRIX =  LOCAL_MATRIX*PARENT_GLOBAL_MATRIX; 
+                // this.globalMatrix = localMatrix * this.parent.globalMatrix ;
+                this.globalMatrix = this.change(localMatrix, this.parent.globalMatrix);
             }
             context.setTransform(this.globalMatrix.a, this.globalMatrix.b, this.globalMatrix.c, this.globalMatrix.d, this.globalMatrix.tx, this.globalMatrix.ty);
             this.render(context);
