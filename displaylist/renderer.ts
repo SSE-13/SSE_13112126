@@ -27,16 +27,16 @@ module render {
             this.globalMatrix = new render.Matrix();
         }
         
-     change(m1:Matrix,m2:Matrix){
-          var matrix = new render.Matrix();
-          matrix.a = m1.a*m2.a;
-          matrix.b = m1.b*m2.b;
-          matrix.c = m1.c*m2.c;
-          matrix.d = m1.d*m2.d;
-          matrix.tx = m1.tx+m2.tx;
-          matrix.ty = m1.ty+m2.ty;
-          return matrix;
-      }
+        change(m1:Matrix,m2:Matrix){
+            var matrix = new render.Matrix();
+            matrix.a = m1.a*m2.a +m1.b*m2.c;
+            matrix.b = m1.a*m2.b + m1.b*m1.d;
+            matrix.c = m1.c*m2.a + m1.d*m2.c;
+            matrix.d = m1.c+m2.b + m1.d+m2.d;
+            matrix.tx = m1.tx*m2.a + m1.ty*m2.c + m2.tx;
+            matrix.ty = m1.tx*m2.b + m1.ty*m2.d + m2.ty;
+            return matrix;
+        }
         draw(context: CanvasRenderingContext2D) {
 
             var parent = this.parent;
@@ -54,7 +54,7 @@ module render {
                 //TODO:
                 // GLOBAL_MATRIX =  LOCAL_MATRIX*PARENT_GLOBAL_MATRIX; 
               // this.globalMatrix = localMatrix * this.parent.globalMatrix ;
-              this.globalMatrix = this.change(localMatrix,this.parent.globalMatrix);
+              this.globalMatrix = this.change(parent.globalMatrix,localMatrix);
             }
 
 
