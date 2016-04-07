@@ -59,24 +59,42 @@ ticker.start([body]);
 var eventCore = new events.EventCore();
 eventCore.init();
 
+var stop=0;
+
 var headHitTest = (localPoint:math.Point,displayObject:render.DisplayObject) =>{
-    alert (`点击位置为${localPoint.x},${localPoint.y}`);
-    return true;
+    if(localPoint.x> && localPoint.x< && localPoint.y> && localPoint.y<){
+        return true;
+    }else{
+        return false;
+    }
+   // alert (`点击位置为${localPoint.x},${localPoint.y}`);
 }
 
 var headOnClick = () => {
-    alert("clicked!!");
-  //  body.vx=-5;
+  //  alert("clicked!!");
+  if(!stop){
+      body.vx=-5;
+  }else{
+      body.vx=5;
+  }
     //修改 HumanBody 的速度，使其反向移动
 }
 var LegHitTest = (localPoint:math.Point,displayObject:render.DisplayObject) =>{
-    alert (`点击位置为${localPoint.x},${localPoint.y}`);
+    if(localPoint.x> && localPoint.x< && localPoint.y> && localPoint.y<){
+        return true;
+    }else{
+        return false;
+    }
+    //alert (`点击位置为${localPoint.x},${localPoint.y}`);
     return true;
 }
 
 var LegOnClick = () => {
-    alert("clicked!!");
-  //  body.vx=-5;
+    //    alert("clicked!!");
+    if(LegHitTest){
+        stop=1;
+        body.vx=0;
+    }
     //修改 HumanBody 的速度，使其反向移动
 }
 
