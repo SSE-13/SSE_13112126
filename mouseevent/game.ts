@@ -57,10 +57,11 @@ renderCore.start(humanContainer, ["head.png","trunk.png","R_arm.png","L_arm.png"
 class HumanBody extends Body {
    
     vx:number = 5;
+    rot:number=2;
    
     onTicker(duringTime: number) {
         this.x += this.vx*duringTime;//+= duringTime * this.vx;
-        this.rotation += 2*Math.PI*duringTime;
+        this.rotation += this.rot*Math.PI*duringTime;
 
     }
 }
@@ -86,9 +87,10 @@ var headHitTest = (localPoint:math.Point,displayObject:render.DisplayObject) =>{
 var headOnClick = () => {
   if(!stop){
       body.vx =-5;
-   //   body.rotation = 0;
+      body.rot = -2;
   }else{
       body.vx = 5;
+      body.rot = 2;
       stop = false;
   }
 }
@@ -98,15 +100,13 @@ var RLegHitTest = (localPoint:math.Point,displayObject:render.DisplayObject) =>{
     }else{
         return false;
     }
-    //alert (`点击位置为${localPoint.x},${localPoint.y}`);
 }
 
 var RLegOnClick = () => {
-    //    alert("clicked!!");
     if(RLegHitTest){
         stop=true;
         body.vx=0;
-     //   body.rotation = 0;
+        body.rot = 0;
     }
 }
 
@@ -116,15 +116,13 @@ var LLegHitTest = (localPoint:math.Point,displayObject:render.DisplayObject) =>{
     }else{
         return false;
     }
-    //alert (`点击位置为${localPoint.x},${localPoint.y}`);
 }
 
 var LLegOnClick = () => {
-    //    alert("clicked!!");
     if(LLegHitTest){
         stop=true;
         body.vx=0;
-        body.rotation = 0;
+        body.rot = 0;
     }
 }
 eventCore.register(head,headHitTest,headOnClick);
