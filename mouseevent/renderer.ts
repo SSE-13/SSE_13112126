@@ -15,6 +15,8 @@ module render {
 
         x = 0;
         y = 0;
+        width=0;
+        hight=0;
         scaleX = 1;
         scaleY = 1;
         rotation = 0;
@@ -35,6 +37,7 @@ module render {
             localMatrix.updateFromDisplayObject(this.x, this.y, this.scaleX, this.scaleY, this.rotation);
             return localMatrix;
         }
+        
 
         draw(context: CanvasRenderingContext2D) {
 
@@ -113,7 +116,7 @@ module render {
 
     }
 
-    class Rect extends DisplayObject {
+    export class Rect extends DisplayObject {
 
         width = 100
 

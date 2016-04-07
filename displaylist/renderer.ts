@@ -25,6 +25,7 @@ module render {
 
         constructor() {
             this.globalMatrix = new render.Matrix();
+           
         }
         
         change(m1:Matrix,m2:Matrix){
