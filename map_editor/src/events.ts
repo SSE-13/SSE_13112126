@@ -53,7 +53,7 @@ module events {
         }
 
 
-        register(displayObject: render.DisplayObject, hitTest: (localPoint: math.Point, displayObject: render.DisplayObject) => Boolean, onClick: (displayObject: render.DisplayObject) => void) {
+       register(displayObject: render.DisplayObject, hitTest: (localPoint: math.Point, displayObject: render.DisplayObject) => Boolean, onClick: (displayObject: render.DisplayObject) => void) {
             this.eventInfos.push({ displayObject, hitTest, onClick });
 
         }

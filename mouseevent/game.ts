@@ -111,7 +111,7 @@ var RLegOnClick = () => {
 }
 
 var LLegHitTest = (localPoint:math.Point,displayObject:render.DisplayObject) =>{
-    if(localPoint.x>0 && localPoint.x<L_leg.width && localPoint.y>0 && localPoint.y<L_leg.hight ){
+    if(localPoint.x>0 && localPoint.x<displayObject.width && localPoint.y>0 && localPoint.y<displayObject.hight ){
         return true;
     }else{
         return false;

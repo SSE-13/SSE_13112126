@@ -7,8 +7,8 @@ var render;
      */
     class DisplayObject {
         constructor() {
-            this.width = 100;
-            this.height = 100;
+            this.width = 0;
+            this.height = 0;
             this.x = 0;
             this.y = 0;
             this.scaleX = 1;
@@ -91,9 +91,10 @@ var render;
         render(context) {
             context.font = "20px Arial";
             context.fillStyle = '#000000';
-            context.fillText('HelloWorld', 0, 20);
+            context.fillText('save', 0, 0);
         }
     }
+    render.TextField = TextField;
     var imagePool = {};
     function loadResource(imageList, callback) {
         var count = 0;

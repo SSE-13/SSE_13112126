@@ -11,6 +11,14 @@ function readFile() {
     return mapData;
 }
 
+function writeFile(){   
+    var map_path = __dirname+"/map.json";
+    
+    var object="{\"map\":"+JSON.stringify(mapData)+"}";
+    //JSON.stringify(mapData); 
+    fs.writeFileSync(map_path,object,"utf-8");
+    return true;
+}
 
 function createMapEditor() {
     var world = new editor.WorldMap();
@@ -29,7 +37,6 @@ function createMapEditor() {
             tile.height = editor.GRID_PIXEL_HEIGHT;
             world.addChild(tile);
 
-
             eventCore.register(tile, events.displayObjectRectHitTest, onTileClick);
         }
     }
@@ -40,17 +47,61 @@ function createMapEditor() {
 
 
 function onTileClick(tile: editor.Tile) {
-    console.log(tile);
+    tile.setWalkable(!tile.getWalkable());
+   // console.log(tile);
+    var row=tile.x/50;
+    var col=tile.y/50;
+   if(mapData[row][col]==0) {
+      mapData[row][col]=1;
+  }else{
+      mapData[row][col]=0;
+  }
 }
-
 
 var mapData = readFile();
 
+var Container = new render.DisplayObjectContainer();
+var saveBackground=new render.Rect();
+saveBackground.x=75;
+saveBackground.y=250;
+saveBackground.width=200;
+saveBackground.height=200;
 
+var save=new render.TextField();
+save.x=110;
+save.y=230;
+
+Container.addChild(saveBackground);
+Container.addChild(save);
+
+function MouseHitTest(localPoint: math.Point, displayObject: render.DisplayObject):boolean{
+     if(localPoint.x > 0 && localPoint.x < displayObject.width && localPoint.y>0 && localPoint.y< displayObject.height ){
+        return true;
+     } else {
+        return false;
+    }
+}
+function MouseOnclick(displayObject: render.DisplayObject) :void{
+    if(MouseHitTest){
+        writeFile();
+    }
+}
+
+/*var MouseHitTest=(localPoint: math.Point, displayObject: render.DisplayObject)=>Boolean{
+     if(localPoint.x > 0 && localPoint.x < displayObject.width && localPoint.y>0 && localPoint.y< displayObject.height ){
+        return true;
+     } else {
+        return false;
+    }
+}
+
+*/
 var renderCore = new render.RenderCore();
 var eventCore = new events.EventCore();
 eventCore.init();
 
-
 var editor = createMapEditor();
 renderCore.start(editor);
+renderCore.drawQueue(Container);
+
+eventCore.register(saveBackground,MouseHitTest,MouseOnclick);

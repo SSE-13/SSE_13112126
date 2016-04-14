@@ -13,8 +13,8 @@ module render {
      */
     export class DisplayObject {
         
-        width = 100
-        height = 100;
+        width = 0
+        height = 0;
         x = 0;
         y = 0;
         scaleX = 1;
@@ -130,12 +130,12 @@ module render {
         }
     }
 
-    class TextField extends DisplayObject {
-
+    export class TextField extends DisplayObject {
+        
         render(context: CanvasRenderingContext2D) {
             context.font = "20px Arial";
             context.fillStyle = '#000000';
-            context.fillText('HelloWorld', 0, 20);
+            context.fillText('save', 0,0);
         }
     }
 
