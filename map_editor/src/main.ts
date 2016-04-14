@@ -11,6 +11,9 @@ function readFile() {
     return mapData;
 }
 
+function writeFile(){   
+    var map_path = __dirname+"/map.json";
+}
 
 function createMapEditor() {
     var world = new editor.WorldMap();
@@ -29,7 +32,6 @@ function createMapEditor() {
             tile.height = editor.GRID_PIXEL_HEIGHT;
             world.addChild(tile);
 
-
             eventCore.register(tile, events.displayObjectRectHitTest, onTileClick);
         }
     }
@@ -40,7 +42,17 @@ function createMapEditor() {
 
 
 function onTileClick(tile: editor.Tile) {
-    console.log(tile);
+    tile.setWalkable(!tile.getWalkable());
+   // console.log(tile);
+    var row=tile.x/50;
+    var col=tile.y/50;
+   if(mapData[row][col]==0) {
+      mapData[row][col]=1;
+  }else{
+      mapData[row][col]=0;
+  }
+    console.log(mapData[row][col]);
+  //  mapData = writeFile(row,col);
 }
 
 

@@ -7,6 +7,9 @@ function readFile() {
     var mapData = obj.map;
     return mapData;
 }
+function writeFile() {
+    var map_path = __dirname + "/map.json";
+}
 function createMapEditor() {
     var world = new editor.WorldMap();
     var rows = mapData.length;
@@ -28,7 +31,18 @@ function createMapEditor() {
     return world;
 }
 function onTileClick(tile) {
-    console.log(tile);
+    tile.setWalkable(!tile.getWalkable());
+    // console.log(tile);
+    var row = tile.x / 50;
+    var col = tile.y / 50;
+    if (mapData[row][col] == 0) {
+        mapData[row][col] = 1;
+    }
+    else {
+        mapData[row][col] = 0;
+    }
+    console.log(mapData[row][col]);
+    //  mapData = writeFile(row,col);
 }
 var mapData = readFile();
 var renderCore = new render.RenderCore();

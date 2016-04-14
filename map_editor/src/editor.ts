@@ -42,5 +42,10 @@ module editor {
         public setWalkable(value) {
             this.color = value ? "#0000FF" : "#FF0000";
         }
+        
+        public getWalkable():boolean
+        {
+            return (this.color == "#0000FF");
+        }
     }
 }

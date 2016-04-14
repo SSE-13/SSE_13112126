@@ -22,6 +22,9 @@ var editor;
         setWalkable(value) {
             this.color = value ? "#0000FF" : "#FF0000";
         }
+        getWalkable() {
+            return (this.color == "#0000FF");
+        }
     }
     editor.Tile = Tile;
 })(editor || (editor = {}));
