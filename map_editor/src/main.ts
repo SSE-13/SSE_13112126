@@ -13,14 +13,12 @@ function readFile() {
 
 function writeFile(){   
     var map_path = __dirname+"/map.json";
-<<<<<<< HEAD
-    
+
     var object="{\"map\":"+JSON.stringify(mapData)+"}";
     //JSON.stringify(mapData); 
     fs.writeFileSync(map_path,object,"utf-8");
     return true;
-=======
->>>>>>> origin/master
+
 }
 
 function createMapEditor() {
@@ -47,8 +45,6 @@ function createMapEditor() {
 
 }
 
-
-
 function onTileClick(tile: editor.Tile) {
     tile.setWalkable(!tile.getWalkable());
    // console.log(tile);
@@ -59,28 +55,23 @@ function onTileClick(tile: editor.Tile) {
   }else{
       mapData[row][col]=0;
   }
-<<<<<<< HEAD
-=======
     console.log(mapData[row][col]);
-  //  mapData = writeFile(row,col);
->>>>>>> origin/master
 }
 
 var mapData = readFile();
 
 var Container = new render.DisplayObjectContainer();
 var saveBackground=new render.Rect();
-saveBackground.x=75;
-saveBackground.y=250;
-saveBackground.width=200;
-saveBackground.height=200;
+saveBackground.x=0;
+saveBackground.y=220;
+saveBackground.width=100;
+saveBackground.height=50;
 
 var save=new render.TextField();
-save.x=110;
-save.y=230;
+save.x=30;
+save.y=250;
 
-Container.addChild(saveBackground);
-Container.addChild(save);
+
 
 function MouseHitTest(localPoint: math.Point, displayObject: render.DisplayObject):boolean{
      if(localPoint.x > 0 && localPoint.x < displayObject.width && localPoint.y>0 && localPoint.y< displayObject.height ){
@@ -92,6 +83,7 @@ function MouseHitTest(localPoint: math.Point, displayObject: render.DisplayObjec
 function MouseOnclick(displayObject: render.DisplayObject) :void{
     if(MouseHitTest){
         writeFile();
+        console.log("save success");
     }
 }
 
@@ -109,7 +101,10 @@ var eventCore = new events.EventCore();
 eventCore.init();
 
 var editor = createMapEditor();
-renderCore.start(editor);
-renderCore.drawQueue(Container);
+renderCore.start(Container);
+
+Container.addChild(saveBackground);
+Container.addChild(save);
+Container.addChild(editor);
 
 eventCore.register(saveBackground,MouseHitTest,MouseOnclick);

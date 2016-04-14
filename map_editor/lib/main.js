@@ -45,19 +45,18 @@ function onTileClick(tile) {
     else {
         mapData[row][col] = 0;
     }
+    console.log(mapData[row][col]);
 }
 var mapData = readFile();
 var Container = new render.DisplayObjectContainer();
 var saveBackground = new render.Rect();
-saveBackground.x = 75;
-saveBackground.y = 250;
-saveBackground.width = 200;
-saveBackground.height = 200;
+saveBackground.x = 0;
+saveBackground.y = 220;
+saveBackground.width = 100;
+saveBackground.height = 50;
 var save = new render.TextField();
-save.x = 110;
-save.y = 230;
-Container.addChild(saveBackground);
-Container.addChild(save);
+save.x = 30;
+save.y = 250;
 function MouseHitTest(localPoint, displayObject) {
     if (localPoint.x > 0 && localPoint.x < displayObject.width && localPoint.y > 0 && localPoint.y < displayObject.height) {
         return true;
@@ -69,6 +68,7 @@ function MouseHitTest(localPoint, displayObject) {
 function MouseOnclick(displayObject) {
     if (MouseHitTest) {
         writeFile();
+        console.log("save success");
     }
 }
 /*var MouseHitTest=(localPoint: math.Point, displayObject: render.DisplayObject)=>Boolean{
@@ -84,6 +84,8 @@ var renderCore = new render.RenderCore();
 var eventCore = new events.EventCore();
 eventCore.init();
 var editor = createMapEditor();
-renderCore.start(editor);
-renderCore.drawQueue(Container);
+renderCore.start(Container);
+Container.addChild(saveBackground);
+Container.addChild(save);
+Container.addChild(editor);
 eventCore.register(saveBackground, MouseHitTest, MouseOnclick);
