@@ -13,11 +13,14 @@ function readFile() {
 
 function writeFile(){   
     var map_path = __dirname+"/map.json";
+<<<<<<< HEAD
     
     var object="{\"map\":"+JSON.stringify(mapData)+"}";
     //JSON.stringify(mapData); 
     fs.writeFileSync(map_path,object,"utf-8");
     return true;
+=======
+>>>>>>> origin/master
 }
 
 function createMapEditor() {
@@ -56,6 +59,11 @@ function onTileClick(tile: editor.Tile) {
   }else{
       mapData[row][col]=0;
   }
+<<<<<<< HEAD
+=======
+    console.log(mapData[row][col]);
+  //  mapData = writeFile(row,col);
+>>>>>>> origin/master
 }
 
 var mapData = readFile();
